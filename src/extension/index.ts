@@ -1,21 +1,43 @@
 import type NodeCG from '@nodecg/types';
-import type { ExampleReplicant } from '../types/schemas';
 
 module.exports = function (nodecg: NodeCG.ServerAPI) {
-	nodecg.log.info("Hello, from your bundle's extension!");
-	nodecg.log.info("I'm where you put all your server-side code.");
-	nodecg.log.info(
-		`To edit me, open "${__filename.replace(
-			'build/extension',
-			'src/extension',
-		)}" in your favorite text editor or IDE.`,
-	);
-	nodecg.log.info('You can use any libraries, frameworks, and tools you want. There are no limits.');
-	nodecg.log.info('Visit https://nodecg.dev for full documentation.');
-	nodecg.log.info('Good luck!');
 
-	const exampleReplicant = nodecg.Replicant('exampleReplicant') as unknown as NodeCG.ServerReplicantWithSchemaDefault<ExampleReplicant>;
-	setInterval(() => {
-		exampleReplicant.value.age++;
-	}, 5000);
+	//const [leftScore, set_leftScore] = useReplicant<number>('leftScore', 0);
+	//const [rightScore, set_rightScore] = useReplicant<number>('rightScore', 0);
+	//const [showScore, set_showScore] = useReplicant<boolean>('showScore', false);
+	//const [showSpoilerOverlay, set_showSpoilerOverlay] = useReplicant<boolean>('showSpoilerOverlay', true);
+
+	let _leftScore = nodecg.Replicant('leftScore')
+	let _rightScore = nodecg.Replicant('rightScore')
+	let _showScore = nodecg.Replicant('showScore')
+	let _showSpoilerOverlay = nodecg.Replicant('showSpoilerOverlay')
+
+	const router = nodecg.Router();
+
+	router.get('/toggleScore', (req, res) => {
+		_showScore.value = !_showScore.value
+		res.send('OK!');
+	});
+
+	router.get('/toggleSpoiler', (req, res) => {
+		_showSpoilerOverlay.value = !_showSpoilerOverlay.value
+		res.send('OK!');
+	});
+
+	router.get('/addLeft', (req, res) => 
+	{
+		//@ts-ignore
+		_leftScore.value = _leftScore.value + 1
+		res.send(`Added +1 to Left Side`);
+	});
+
+	router.get('/addRight', (req, res) => 
+	{
+		//@ts-ignore
+		_rightScore.value = _rightScore.value + 1
+		res.send(`Added +1 to Right Side`);
+	});
+
+	nodecg.mount('/score', router);
+
 };

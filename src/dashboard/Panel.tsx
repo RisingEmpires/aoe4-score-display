@@ -6,6 +6,7 @@ export function Panel() {
 	const [leftScore, set_leftScore] = useReplicant<number>('leftScore', 0);
 	const [rightScore, set_rightScore] = useReplicant<number>('rightScore', 0);
 	const [showScore, set_showScore] = useReplicant<boolean>('showScore', false);
+	const [showSpoilerOverlay, set_showSpoilerOverlay] = useReplicant<boolean>('showSpoilerOverlay', true);
 	const [betweenText, set_betweenText] = useReplicant<string>('betweenText', '')
 
 	const handleSubmit = (event) => {
@@ -28,7 +29,7 @@ export function Panel() {
 				<label>Between Text</label>
 				<input type="text" placeholder="Bo3" name="betweenText" value={betweenText} onChange={(event) => {
 					set_betweenText(event.target.value)
-				}}/>
+				}} />
 			</div>
 			<hr />
 			<div>
@@ -81,6 +82,11 @@ export function Panel() {
 				<button onClick={(() => set_showScore(!showScore))} className="toggleButton w-36" name="toggleButton">
 					Toggle Score
 				</button>
+			</div>
+			<hr />
+			<div>
+				<label>Show Spoiler Overlay </label>
+				<input type='checkbox' checked={showSpoilerOverlay} onChange={(() => set_showSpoilerOverlay(!showSpoilerOverlay))}/> 
 			</div>
 		</>
 	)
