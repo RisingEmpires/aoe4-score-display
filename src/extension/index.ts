@@ -1,4 +1,5 @@
 import type NodeCG from '@nodecg/types';
+import { klona } from 'klona';
 
 module.exports = function (nodecg: NodeCG.ServerAPI) {
 
@@ -36,6 +37,14 @@ module.exports = function (nodecg: NodeCG.ServerAPI) {
 		//@ts-ignore
 		_rightScore.value = _rightScore.value + 1
 		res.send(`Added +1 to Right Side`);
+	});
+
+	router.get('/swapScore', (req, res) => 
+	{
+		let temp = klona(_leftScore.value)
+		_leftScore.value = _rightScore.value
+		_rightScore.value = temp
+		res.send(`Swapped Scores`);
 	});
 
 	nodecg.mount('/score', router);
