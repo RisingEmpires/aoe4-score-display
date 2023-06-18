@@ -23,6 +23,13 @@ export function Panel() {
 		set_rightScore(temp)
 	}
 
+	const resetScore = (event: any) => {
+		event.preventDefault();
+		console.log("Resetting scores")
+		set_leftScore(0)
+		set_rightScore(0)
+	}
+
 	return (
 		<>
 			<div>
@@ -35,7 +42,7 @@ export function Panel() {
 			<div>
 				<label>Left Score: </label>
 				<input type="number"
-					min={1}
+					min={0}
 					max={9}
 					placeholder="0"
 					name="leftScore"
@@ -54,8 +61,11 @@ export function Panel() {
 						margin: '2rem',
 						width: '33.3%'
 					}} />
-					<button onClick={swapScore} className="swapButton w-36" name="swapScore">
+					<button onClick={swapScore} className="swapButton" name="swapScore" style={{margin:'2px 2px'}}>
 						Swap Score
+					</button>
+					<button onClick={resetScore} className="toggleButton" name="resetScore" style={{margin:'2px 2px'}}>
+						Reset Score
 					</button>
 					<hr style={{
 						margin: '2rem',
@@ -64,7 +74,7 @@ export function Panel() {
 				</div>
 				<label>Right Score: </label>
 				<input type="number"
-					min={1}
+					min={0}
 					max={9}
 					placeholder="0"
 					name="rightScore"
@@ -77,8 +87,8 @@ export function Panel() {
 			<hr />
 
 			<div className=''>
-				<label>Show Score </label>
-				<input type='checkbox' checked={showScore} />
+				<label>Score Visible </label>
+				<input type='checkbox' checked={showScore} onChange={(() => set_showScore(!showScore))}/>
 				<button onClick={(() => set_showScore(!showScore))} className="toggleButton w-36" name="toggleButton">
 					Toggle Score
 				</button>
