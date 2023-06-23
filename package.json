@@ -89,7 +89,8 @@
     "react": "*",
     "react-dom": "*",
     "react-select": "^5.7.3",
-    "ts-node": "*"
+    "ts-node": "*",
+    "use-nodecg": "^0.4.1-2"
   },
   "devDependencies": {
     "@nodecg/types": "^2.0.0",
