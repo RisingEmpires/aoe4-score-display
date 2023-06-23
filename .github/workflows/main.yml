@@ -33,8 +33,8 @@ jobs:
       - name: Build bundle
         run: |
           npm run build --if-present --skipLibCheck
-          zip -r score-display.zip package.json node_modules package-lock.json dashboard extension graphics README.md LICENSE
-          tar -cvf score-display.tar package.json node_modules package-lock.json dashboard extension graphics README.md LICENSE
+          zip -r score-display.zip package.json node_modules package-lock.json dashboard graphics README.md LICENSE
+          tar -cf score-display.tar package.json node_modules package-lock.json dashboard graphics README.md LICENSE
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
