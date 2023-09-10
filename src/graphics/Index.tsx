@@ -16,7 +16,7 @@ export function Index() {
 
 	return (
 		<>
-			{showScore ? <div><img src={ScoreboardOverlay} style={{
+			{showScore ? <div><img className="scoreboardOverlay" src={ScoreboardOverlay} style={{
 				position: 'absolute',
 				width: '100vw',
 				height: '100vh'
