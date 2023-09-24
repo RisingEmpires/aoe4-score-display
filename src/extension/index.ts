@@ -14,6 +14,7 @@ module.exports = function (nodecg: NodeCG.ServerAPI) {
 	let _showSpoilerOverlay = nodecg.Replicant('showSpoilerOverlay')
 
 	const router = nodecg.Router();
+	router.use(nodecg.util.authCheck)
 
 	router.get('/toggleScore', (req, res) => {
 		_showScore.value = !_showScore.value
