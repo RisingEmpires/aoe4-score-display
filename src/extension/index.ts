@@ -11,9 +11,16 @@ module.exports = function (nodecg: NodeCG.ServerAPI) {
 	let _leftScore = nodecg.Replicant('leftScore')
 	let _rightScore = nodecg.Replicant('rightScore')
 	let _showScore = nodecg.Replicant('showScore')
+
+	let _betweenText = nodecg.Replicant('betweenText')
+	
+	let leftName = nodecg.Replicant('leftName', 'aoe-4-civ-draft');
+	let rightName = nodecg.Replicant('rightName', 'aoe-4-civ-draft');
+
 	let _showSpoilerOverlay = nodecg.Replicant('showSpoilerOverlay')
 
 	const router = nodecg.Router();
+	const openRouter = nodecg.Router();
 	router.use(nodecg.util.authCheck)
 
 	router.get('/toggleScore', (req, res) => {
@@ -48,6 +55,15 @@ module.exports = function (nodecg: NodeCG.ServerAPI) {
 		res.send(`Swapped Scores`);
 	});
 
+	openRouter.get('/currentScore', (req, res) => 
+	{
+		
+		_rightScore.value
+		res.send(`${leftName.value} - ${_leftScore.value} (${_betweenText.value}) ${_rightScore.value} - ${rightName.value}`);
+	});
+
+
 	nodecg.mount('/score', router);
+	nodecg.mount('/openScore', openRouter);
 
 };
