@@ -13,6 +13,7 @@ export function Index() {
 	const [showScore, set_showScore] = useReplicant<boolean>('showScore', false);
 	const [showSpoilerOverlay, set_showSpoilerOverlay] = useReplicant<boolean>('showSpoilerOverlay', true);
 	const [betweenText, set_betweenText] = useReplicant<string>('betweenText', '')
+	const [flipScore, set_flipScore] = useReplicant<boolean>('flipScore', false);
 
 	return (
 		<>
@@ -23,8 +24,8 @@ export function Index() {
 			}} />
 
 			<div>
-				<ScoreDisplay score={leftScore} rotate={true} className={'leftScore'}/>
-				<ScoreDisplay score={rightScore} rotate={true} className={'rightScore'}/>
+				<ScoreDisplay score={leftScore} rotate={true} className={flipScore ? 'rightScore' : 'leftScore'}/>
+				<ScoreDisplay score={rightScore} rotate={true} className={flipScore ? 'leftScore' : 'rightScore'}/>
 			</div>
 
 			<h1 className='betweenText'>{betweenText}</h1> </div> : <> </>}
