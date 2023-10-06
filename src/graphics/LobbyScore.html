@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<style>
+		@font-face {
+			font-family: Monsterrat;
+			src: url('./Montserrat.ttf');
+		}
+
+		body {
+			font-family: Monsterrat;
+			font-weight: 900;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+			text-rendering: optimizeLegibility;
+		}
+
+		.rotate {
+			animation: rotation 120s infinite linear;
+		}
+
+		@keyframes rotation {
+			from {
+				transform: rotate(0deg);
+			}
+
+			to {
+				transform: rotate(359deg);
+			}
+		}
+
+		.rightScore img {
+			animation-direction: reverse;
+		}
+
+		.leftScore {
+			position: absolute;
+			transform: translate(-50%, -50%);
+			top: 13%;
+			left: 45%;
+		}
+
+		.rightScore {
+			position: absolute;
+			transform: translate(50%, -50%);
+			top: 13%;
+			right: 45%;
+		}
+
+		.scoreContainer img {
+			width: 90px;
+		}
+
+		.scoreContainer {
+			color: white;
+		}
+
+		.scoreContainer h1 {
+			position: absolute;
+			transform: translate(-50%, -50%);
+			top: 23%;
+			text-shadow: 2px 2px 0px #000000;
+			left: 50%;
+		}
+
+		.betweenText {
+			color: white;
+			transform: translate(-50%, -50%);
+			position: absolute;
+			text-shadow: 2px 2px 0px #000000;
+			top: 12%;
+			left: 50%;
+		}
+
+		.spoilerCover {
+			position: absolute;
+			width: 100vw;
+			height: 100vh;
+		}
+
+		.leftSideIcon {
+			width: 80px;
+			height: 80px;
+			transform: translate(-50%, -50%);
+			position: absolute;
+			top: 5%;
+			left: 26.5%;
+		}
+
+		.rightSideIcon {
+			width: 80px;
+			height: 80px;
+			transform: translate(50%, -50%);
+			position: absolute;
+			top: 5%;
+			right: 26.5%;
+		}
+
+		.teamName {
+			text-transform: uppercase;
+			color: white;
+			top: 6.4%;
+		}
+
+		.leftName {
+			transform: translate(-50%, -50%);
+			position: absolute;
+			left: 35.9%;
+		}
+
+		.rightName {
+			transform: translate(50%, -50%);
+			position: absolute;
+			right: 35.9%;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="root"></div>
+	<script type="module" src="./LobbyScore-bootstrap.tsx"></script>
+</body>
+
+</html>
