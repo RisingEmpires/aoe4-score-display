@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useReplicant } from 'use-nodecg';
 //@ts-ignore
 import ScoreboardOverlay from './ScoreboardOverlay.png'
@@ -15,21 +15,33 @@ export function Index() {
 	const [betweenText, set_betweenText] = useReplicant<string>('betweenText', '')
 	const [flipScore, set_flipScore] = useReplicant<boolean>('flipScore', false);
 
+	const [theme, set_theme] = useReplicant<{ value: string; label: string; }>('theme', { value: '../../../assets/nodecg-themer/themes/default.css', label: 'default' }, { namespace: 'nodecg-themer' });
+
+	const [themeDiv, set_themeDiv] = useState(<></>)
+
+	useEffect(() => {
+		console.log(theme)
+		if (!theme) return;
+		console.log(theme)
+		set_themeDiv(<link rel='stylesheet' type='text/css' href={theme.value} />)
+	}, [theme])
+
 	return (
 		<>
-			{showScore ? <div><img className="scoreboardOverlay" src={ScoreboardOverlay} style={{
+			{themeDiv}
+			{showScore ? <div><img className="score-scoreboardOverlay" src={ScoreboardOverlay} style={{
 				position: 'absolute',
 				width: '100vw',
 				height: '100vh'
 			}} />
 
-			<div>
-				<ScoreDisplay score={leftScore} rotate={true} className={flipScore ? 'rightScore' : 'leftScore'}/>
-				<ScoreDisplay score={rightScore} rotate={true} className={flipScore ? 'leftScore' : 'rightScore'}/>
-			</div>
+				<div>
+					<ScoreDisplay score={leftScore} rotate={true} className={flipScore ? 'score-rightScore' : 'score-leftScore'} />
+					<ScoreDisplay score={rightScore} rotate={true} className={flipScore ? 'score-leftScore' : 'score-rightScore'} />
+				</div>
 
-			<h1 className='betweenText'>{betweenText}</h1> </div> : <> </>}
-			{showSpoilerOverlay ? <img src={SpoilerCover} className={'spoilerCover'}/> : <> </>}
+				<h1 className='score-betweenText'>{betweenText}</h1> </div> : <> </>}
+			{showSpoilerOverlay ? <img src={SpoilerCover} className={'score-spoilerCover'} /> : <> </>}
 		</>
 	);
 }

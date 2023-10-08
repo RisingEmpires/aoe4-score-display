@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useReplicant } from 'use-nodecg';
 //@ts-ignore
 import ScoreboardOverlay from './ScoreboardOverlay.png'
@@ -15,11 +15,23 @@ export function LobbyScore() {
 	const [betweenText, set_betweenText] = useReplicant<string>('betweenText', '')
 	const [flipScore, set_flipScore] = useReplicant<boolean>('flipScore', false);
 
+	const [theme, set_theme] = useReplicant<{ value: string; label: string; }>('theme', { value: '../../../assets/nodecg-themer/themes/default.css', label: 'default' }, { namespace: 'nodecg-themer' });
+
+	const [themeDiv, set_themeDiv] = useState(<></>)
+
+	useEffect(() => {
+		console.log(theme)
+		if (!theme) return;
+		console.log(theme)
+		set_themeDiv(<link rel='stylesheet' type='text/css' href={theme.value} />)
+	}, [theme])
+
 	return (
 		<>
+			{themeDiv}
 			<div>
-				<ScoreDisplay score={leftScore} rotate={true} className={'leftScore'}/>
-				<ScoreDisplay score={rightScore} rotate={true} className={'rightScore'}/>
+				<ScoreDisplay score={leftScore} rotate={true} className={'lobbyScore-leftScore'} />
+				<ScoreDisplay score={rightScore} rotate={true} className={'lobbyScore-rightScore'} />
 			</div>
 		</>
 	);
