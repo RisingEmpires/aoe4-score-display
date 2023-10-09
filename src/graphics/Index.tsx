@@ -36,8 +36,8 @@ export function Index() {
 			}} />
 
 				<div>
-					<ScoreDisplay score={leftScore} rotate={true} className={flipScore ? 'score-rightScore' : 'score-leftScore'} />
-					<ScoreDisplay score={rightScore} rotate={true} className={flipScore ? 'score-leftScore' : 'score-rightScore'} />
+					<ScoreDisplay score={leftScore} rotate={true} className={`score-scoreContainer ${flipScore ? 'score-rightScore' : 'score-leftScore'}`} />
+					<ScoreDisplay score={rightScore} rotate={true} className={`score-scoreContainer ${flipScore ? 'score-leftScore' : 'score-rightScore'}`} />
 				</div>
 
 				<h1 className='score-betweenText'>{betweenText}</h1> </div> : <> </>}

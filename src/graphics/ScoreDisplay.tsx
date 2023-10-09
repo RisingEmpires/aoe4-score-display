@@ -10,7 +10,7 @@ type ScoreDisplayProps = {
 
 export const ScoreDisplay = ({ score, rotate, className }: ScoreDisplayProps) => {
     return (
-        <div className={`score-scoreContainer ${className}`}>
+        <div className={className}>
             <h1>{score}</h1>
             <img src={GoldenCircle} className={rotate ? 'score-goldCircle score-rotate' : 'score-goldCircle'}/>
         </div>

@@ -15,6 +15,9 @@ export function LobbyScore() {
 	const [betweenText, set_betweenText] = useReplicant<string>('betweenText', '')
 	const [flipScore, set_flipScore] = useReplicant<boolean>('flipScore', false);
 
+	const [extraInfo1, set_extraInfo1] = useReplicant<string>('extraInfo1', '')
+	const [extraInfo2, set_extraInfo2] = useReplicant<string>('extraInfo2', '')
+
 	const [theme, set_theme] = useReplicant<{ value: string; label: string; }>('theme', { value: '../../../assets/nodecg-themer/themes/default.css', label: 'default' }, { namespace: 'nodecg-themer' });
 
 	const [themeDiv, set_themeDiv] = useState(<></>)
@@ -29,10 +32,11 @@ export function LobbyScore() {
 	return (
 		<>
 			{themeDiv}
-			<div>
-				<ScoreDisplay score={leftScore} rotate={true} className={'lobbyScore-leftScore'} />
-				<ScoreDisplay score={rightScore} rotate={true} className={'lobbyScore-rightScore'} />
-			</div>
+			<div className='lobbyScore-extraInfo lobbyScore-extraInfo1'>{extraInfo1}</div>
+			<div className='lobbyScore-extraInfo lobbyScore-extraInfo2'>{extraInfo2}</div>
+			<div className='lobbyScore-betweenText'>{betweenText}</div>
+			<ScoreDisplay score={leftScore} rotate={true} className={'lobbyScore-scoreContainer lobbyScore-leftScore'} />
+			<ScoreDisplay score={rightScore} rotate={true} className={'lobbyScore-scoreContainer lobbyScore-rightScore'} />
 		</>
 	);
 }
