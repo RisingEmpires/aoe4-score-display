@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useReplicant } from 'use-nodecg';
 //@ts-ignore
 import StreamOverlay from './2v2NO_IOU.png'
@@ -30,32 +30,45 @@ export function TeamGameNoUI() {
 	const [rightSideIcon, set_rightSideIcon] = useReplicant<DropdownOption>('rightSideIcon', { value: '', label: '' }, { namespace: 'aoe-4-team-games' });
 	const [showIcons, set_showIcons] = useReplicant<boolean>('showIcons', true, { namespace: 'aoe-4-team-games' });
 
+	const [flipScore, set_flipScore] = useReplicant<boolean>('flipScore', false);
+
+	const [theme, set_theme] = useReplicant<{ value: string; label: string; }>('theme', { value: '../../../assets/nodecg-themer/themes/default.css', label: 'default' }, { namespace: 'nodecg-themer' });
+
+	const [themeDiv, set_themeDiv] = useState(<></>)
+
+	useEffect(() => {
+		console.log(theme)
+		if (!theme) return;
+		console.log(theme)
+		set_themeDiv(<link rel='stylesheet' type='text/css' href={theme.value} />)
+	}, [theme])
 
 	return (
 		<>
-			<img src={StreamOverlay} style={{
+			{themeDiv}
+			<img src={StreamOverlay} className='teamGame-scoreboardOverlay' style={{
 				position: 'absolute',
 				width: '100vw',
 				height: '100vh'
 			}} />
 
-			<h1 className='teamName leftName'>{leftName}</h1>
-			<h1 className='teamName rightName'>{rightName}</h1>
+			<h1 className='teamGame-teamName teamGame-leftName'>{leftName}</h1>
+			<h1 className='teamGame-teamName teamGame-rightName'>{rightName}</h1>
 
 			{showScore ? <div>
 
 				<div>
-					<ScoreDisplay score={leftScore} rotate={true} className={'leftScore'} />
-					<ScoreDisplay score={rightScore} rotate={true} className={'rightScore'} />
+					<ScoreDisplay score={leftScore} rotate={true} className={`teamGame-scoreContainer ${flipScore ? 'teamGame-rightScore' : 'teamGame-leftScore'}`} />
+					<ScoreDisplay score={rightScore} rotate={true} className={`teamGame-scoreContainer ${flipScore ? 'teamGame-leftScore' : 'teamGame-rightScore'}`} />
 				</div>
 
-				<h1 className='betweenText'>{betweenText}</h1>
+				<h1 className='teamGame-betweenText'>{betweenText}</h1>
 			</div> : <> </>}
 
 			{showIcons ? <div>
-				<img src={leftSideIcon.value} className='leftSideIcon' />
+				<img src={leftSideIcon.value} className='teamGame-leftSideIcon' />
 
-				<img src={rightSideIcon.value} className='rightSideIcon' />
+				<img src={rightSideIcon.value} className='teamGame-rightSideIcon' />
 
 			</div> : <> </>}
 		</>
