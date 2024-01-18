@@ -52,8 +52,8 @@ export function TeamGameNoUI() {
 				height: '100vh'
 			}} />
 
-			<h1 className='teamGame-teamName teamGame-leftName'>{leftName}</h1>
-			<h1 className='teamGame-teamName teamGame-rightName'>{rightName}</h1>
+			<h1 className={`teamGame-teamName ${flipScore ? 'teamGame-rightName' : 'teamGame-leftName'} `}>{leftName}</h1>
+			<h1 className={`teamGame-teamName ${flipScore ? 'teamGame-leftName' : 'teamGame-rightName' }`}>{rightName}</h1>
 
 			{showScore ? <div>
 
@@ -66,9 +66,9 @@ export function TeamGameNoUI() {
 			</div> : <> </>}
 
 			{showIcons ? <div>
-				<img src={leftSideIcon.value} className='teamGame-leftSideIcon' />
+				<img src={leftSideIcon.value} className={`${flipScore ? 'teamGame-rightSideIcon' : 'teamGame-leftSideIcon'} `} />
 
-				<img src={rightSideIcon.value} className='teamGame-rightSideIcon' />
+				<img src={rightSideIcon.value} className={`${flipScore ? 'teamGame-leftSideIcon' : 'teamGame-rightSideIcon'} `} />
 
 			</div> : <> </>}
 		</>
